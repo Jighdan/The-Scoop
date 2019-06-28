@@ -1,5 +1,5 @@
 {
-  "name": "create-next-app-cli",
+  "name": "the-scoop",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
@@ -12,8 +12,25 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.0.0",
+    "firebase": "^6.2.3",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-optipng": "^7.0.0",
+    "imagemin-svgo": "^7.0.0",
+    "localforage": "^1.7.3",
     "next": "^8.1.0",
+    "next-compose-plugins": "^2.2.0",
+    "next-optimized-images": "^2.5.3",
+    "nookies": "^2.0.6",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-icons": "^3.7.0",
+    "reactstrap": "^8.0.0",
+    "styled-components": "^4.3.2",
+    "styled-dropdown-component": "^3.0.1",
+    "unstated-next": "^1.1.0"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.10.1"
   }
 }
