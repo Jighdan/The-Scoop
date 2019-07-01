@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.0.0",
+    "easy-peasy": "^2.6.4",
     "firebase": "^6.2.3",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-optipng": "^7.0.0",
@@ -27,8 +28,7 @@
     "react-icons": "^3.7.0",
     "reactstrap": "^8.0.0",
     "styled-components": "^4.3.2",
-    "styled-dropdown-component": "^3.0.1",
-    "unstated-next": "^1.1.0"
+    "styled-dropdown-component": "^3.0.1"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.10.1"

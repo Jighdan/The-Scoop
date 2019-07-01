@@ -5,7 +5,7 @@ import Flex from '../../Flex';
 import Dropdown from './Dropdown';
 import localforage from 'localforage'
 import { PascalCase } from '../../../../utils/pascalCase';
-import { Firebase, GoogleAuthProvider } from '../../../../utils/firebaseconfig';
+import { Firebase, GoogleAuthProvider } from '../../../../config/firebaseconfig';
 
 const GoogleSignInButton = styled.img`
     max-height: 45px;
@@ -32,37 +32,61 @@ export default class SignInComponent extends Component{
         }).catch((err)=>{
             console.log(err);
         });
-
     }
 
-    _parseGoogleAuthData = (obj) => {
-        const model = {
+    _parseLocalData = (obj) => {
+        return {
+            id: obj.uid,
             displayName: obj.displayName,
             photoURL: obj.photoURL,
             email: obj.email,
         }
-        return model;
+    }
+    _parseRemoteData = (obj) => {
+        return {
+            displayName: obj.displayName,
+            email: obj.email,
+        }
     }
 
    _signIn = () => {
+        const db = Firebase.firestore();
+        //Authenticate User
         Firebase.auth().signInWithPopup(GoogleAuthProvider).then((result)=>{
-            const User = this._parseGoogleAuthData(result.user)
-            localforage.setItem('user', User)
-            .then((user)=>{
-                this.setState({user: user})
+            // On successful auth we: 
+            // Parse results
+            const LocalUser = this._parseLocalData(result.user);
+            const RemoteUser = this._parseRemoteData(result.user);
+            // Create a reference based on UID returned from Google auth
+            const docRef = db.collection('users').doc(`${LocalUser.id}`);
+            const uid = result.user.uid;
+            // Save locally
+            localforage.setItem('user', LocalUser)
+                .then((user)=>{
+                    this.setState({user: user});
+                }).catch((err)=>{
+                    console.log('Cant save user to local storage' + err);
+                })
+            docRef.get().then((doc)=>{
+                // Check if document with the docRef ID exists, if not, we create one in the DB.
+                if (doc.exists) {
+                    console.log('User exists in DB');
+                } else {
+                    db.collection('users').doc(uid)
+                    .set(this._parseRemoteData(result.user))
+                    .then(()=>{
+                        console.log('Saved user to db ' + RemoteUser);
+                    }).catch((err)=>{
+                        console.log('Error while saving user to Firestore ' + err);
+                    })
+                }
             }).catch((err)=>{
-                console.log('CANT SET ITEM' + err)
+                console.log('Error while retrieving document ' + err );
             });
-            
         }).catch((err)=>{
-            console.log('CANT AUTHENTICATE' + err)
+            console.log('Couldnt Authenticate ' + err);
         });
     }
-
-    
-
-
-   
 
     render(){
         const {
@@ -74,7 +98,7 @@ export default class SignInComponent extends Component{
                <Welcome>
                    Welcome {PascalCase(user.displayName)}
                </Welcome>
-                <Dropdown userState={()=> this.setState({user: null})}>
+                <Dropdown setUserStateNull={()=> this.setState({user: null})}>
                     <ProfilePic src={user.photoURL} />
                 </Dropdown>
                

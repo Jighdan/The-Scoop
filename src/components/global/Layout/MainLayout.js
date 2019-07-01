@@ -3,7 +3,6 @@ import Head from 'next/head';
 import styled from 'styled-components';
 import Header from './Header/Header';
 import colors from '../../../assets/styles/colors';
-import { UserContext } from '../../../context/UserContext';
 
 
 const ContentContainer = styled.div`

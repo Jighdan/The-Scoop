@@ -27,12 +27,13 @@ export default function Button(props) {
         className,
         style,
         color,
+        shadow,
         onClick,
         ...rest
     } = props;
 
     return(
-        <StyledButton className={className} style={style} color={color} onClick={onClick} {...rest}>
+        <StyledButton className={className} style={style} color={color} onClick={onClick} {...rest} shadow={shadow}>
             {children}
         </StyledButton>
     )
