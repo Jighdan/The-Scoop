@@ -20,6 +20,7 @@ export default () =>{
 			padding: 0;
 			border: 0;
 			font-size: 100%;
+			font-weight: 400;
 			font-family: Roboto, sans-serif;
 			vertical-align: baseline;
 		}
@@ -37,6 +38,12 @@ export default () =>{
 		}
 		a, button {
 			cursor: pointer;
+		}
+		a {
+			text-decoration: none;
+		}
+		a:visited {
+			color: blue;
 		}
 		blockquote, q {
 			quotes: none;

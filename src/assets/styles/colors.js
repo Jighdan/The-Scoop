@@ -4,6 +4,7 @@ const colors = {
     primary: '#2176AE',
     secondary: '#3DA5D9',
     orange: '#EA7317',
+    red: '#e62e2e',
     background: '#818791',
     notquitewhite: '#EBE9E9',
     grey: '#c2c2c2',

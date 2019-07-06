@@ -6,10 +6,10 @@ import colors from '../../../assets/styles/colors';
 
 
 const ContentContainer = styled.div`
-    min-height: 100vh;
+    min-height: calc(100vh - 85px);
     background-color: ${colors.background};
     z-index: -1;
-    padding-top: 91px;
+    margin-top: 85px;
     box-sizing: border-box;
     overflow-y: scroll;
 `

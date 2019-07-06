@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import Router from 'next/router'
 import styled from 'styled-components';
 import Flex from '../../Flex';
@@ -21,92 +21,86 @@ const ProfilePic = styled.img`
     border-radius: 50%;
     cursor: pointer;
 `
-export default class SignInComponent extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            user: null
-        };
-        localforage.getItem('user').then((usr)=>{
-            if (usr) this.setState({user: usr});
-        }).catch((err)=>{
-            console.log(err);
-        });
-    }
+const SignIn = (props) => {
+    const [user, setUser] = useState(null);
 
-    _parseLocalData = (obj) => {
+    useEffect(() => {
+        const effect = async () => {
+            try {
+                const userExists = await localforage.getItem('user');
+                if (userExists) {
+                    setUser(userExists);
+                }
+            } catch (err) {
+                console.log('Error in sign in component: ' + err);
+            }
+        }
+        effect();
+        
+    }, []);
+
+    const _parseLocalData = (obj) => {
         return {
             id: obj.uid,
             displayName: obj.displayName,
             photoURL: obj.photoURL,
             email: obj.email,
         }
-    }
-    _parseRemoteData = (obj) => {
+    };
+
+    const _parseRemoteData = (obj) => {
         return {
             displayName: obj.displayName,
             email: obj.email,
         }
+    };
+
+    const _signIn = async () => {
+        try {
+            const db = Firebase.firestore();
+
+            const signInResult = await Firebase.auth().signInWithPopup(GoogleAuthProvider);
+
+            const localUser = _parseLocalData(signInResult.user);
+            const remoteUser = _parseRemoteData(signInResult.user);
+            const docRef = db.collection('users').doc(`${localUser.id}`);
+            const uid = signInResult.user.uid;
+
+            const savedLocalUser = await localforage.setItem('user', localUser);
+            setUser(savedLocalUser);
+
+            const userDoc = docRef.get();
+            if (userDoc.exists) {
+                console.log('User exists in DB');
+            } else {
+                await db.collection('users').doc(uid)
+                    .set(remoteUser)
+            }
+
+        } catch(err){
+            console.log('Error in SignIn function ' + err);  
+        }
+
     }
 
-   _signIn = () => {
-        const db = Firebase.firestore();
-        //Authenticate User
-        Firebase.auth().signInWithPopup(GoogleAuthProvider).then((result)=>{
-            // On successful auth we: 
-            // Parse results
-            const LocalUser = this._parseLocalData(result.user);
-            const RemoteUser = this._parseRemoteData(result.user);
-            // Create a reference based on UID returned from Google auth
-            const docRef = db.collection('users').doc(`${LocalUser.id}`);
-            const uid = result.user.uid;
-            // Save locally
-            localforage.setItem('user', LocalUser)
-                .then((user)=>{
-                    this.setState({user: user});
-                }).catch((err)=>{
-                    console.log('Cant save user to local storage' + err);
-                })
-            docRef.get().then((doc)=>{
-                // Check if document with the docRef ID exists, if not, we create one in the DB.
-                if (doc.exists) {
-                    console.log('User exists in DB');
-                } else {
-                    db.collection('users').doc(uid)
-                    .set(this._parseRemoteData(result.user))
-                    .then(()=>{
-                        console.log('Saved user to db ' + RemoteUser);
-                    }).catch((err)=>{
-                        console.log('Error while saving user to Firestore ' + err);
-                    })
-                }
-            }).catch((err)=>{
-                console.log('Error while retrieving document ' + err );
-            });
-        }).catch((err)=>{
-            console.log('Couldnt Authenticate ' + err);
-        });
+    return(
+        <div>
+        {
+        user ?
+       <Flex>
+           <Welcome>
+               Welcome {PascalCase(user.displayName)}
+           </Welcome>
+            <Dropdown setUserStateNull={()=> setUser(null)}>
+                <ProfilePic src={user.photoURL} />
+            </Dropdown>
+           
+       </Flex>  
+       :
+       <GoogleSignInButton src={require('../../../../assets/images/GoogleSingIn.png')} onClick={_signIn}/>
     }
+    </div>
+   )
 
-    render(){
-        const {
-            user,
-        } = this.state;
-        return(
-            user ?
-           <Flex>
-               <Welcome>
-                   Welcome {PascalCase(user.displayName)}
-               </Welcome>
-                <Dropdown setUserStateNull={()=> this.setState({user: null})}>
-                    <ProfilePic src={user.photoURL} />
-                </Dropdown>
-               
-           </Flex>  
-           :
-           <GoogleSignInButton src={require('../../../../assets/images/GoogleSingIn.png')} onClick={this._signIn}/>
-   
-       )
-    }
-    
 }
+export default SignIn

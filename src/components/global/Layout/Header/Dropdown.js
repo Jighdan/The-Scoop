@@ -7,6 +7,8 @@ import {
   } from 'styled-dropdown-component';
 import Router from 'next/router';
 import SignOut from './SignOut';
+import colors from '../../../../assets/styles/colors';
+
 
 const AbsoluteDropdown = styled.div`
     position: absolute;
@@ -37,7 +39,7 @@ const CustomDropdown = (props) => {
     const _routeToSettings = () => {
         Router.push('/profile-settings');
     }
-    const btnColor = '#e62e2e'
+    const btnColor = colors.red;
     const btnShadow = '0px 4px 0px 0px #940101';
     return(
         <div>

@@ -24,13 +24,19 @@
     "next-optimized-images": "^2.5.3",
     "nookies": "^2.0.6",
     "react": "^16.8.6",
+    "react-dnd": "^9.0.1",
+    "react-dnd-cjs": "^9.0.1",
+    "react-dnd-html5-backend": "^9.0.0",
+    "react-dnd-html5-backend-cjs": "^9.0.1",
     "react-dom": "^16.8.6",
     "react-icons": "^3.7.0",
     "reactstrap": "^8.0.0",
     "styled-components": "^4.3.2",
-    "styled-dropdown-component": "^3.0.1"
+    "styled-dropdown-component": "^3.0.1",
+    "typeface-roboto": "0.0.54"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.5.0",
     "babel-plugin-styled-components": "^1.10.1"
   }
 }

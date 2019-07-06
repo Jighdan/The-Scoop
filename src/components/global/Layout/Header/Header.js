@@ -15,6 +15,7 @@ const StyledHeader = styled.div`
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     background-color: ${colors.dark};
     color: #FFFFFF;
+    z-index: 100;
 `
 
 const Logo = styled.img`
