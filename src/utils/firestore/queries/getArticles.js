@@ -1,7 +1,7 @@
 import { Firebase } from '../../../config/firebaseconfig';
 
-const getArticles = async (sourceObj) => {
-    const sourceRef = Firebase.firestore().collection('articles').doc('sources').collection(sourceObj).orderBy('timestamp', 'desc');
+const getArticles = async (sourceName) => {
+    const sourceRef = Firebase.firestore().collection('articles').doc('sources').collection(sourceName).orderBy('timestamp', 'desc');
     const articles = await sourceRef.get()
     let allData = [];
     articles.forEach((article)=>{
