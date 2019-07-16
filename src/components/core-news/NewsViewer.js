@@ -3,8 +3,15 @@ import styled from 'styled-components';
 import Surface from '../global/Surface';
 import { useDrop } from 'react-dnd-cjs'
 import ItemTypes from './ItemTypes';
-import Source from './Source';
+import Source from './SourceContent';
 import { MdBlock } from 'react-icons/md';
+
+
+const Prompt = styled.div`
+    padding: 25px;
+    border: 2px dashed #000000;
+`
+
 
 const Container = styled(Surface)`
     position: relative;
@@ -24,26 +31,28 @@ const ClearBtn = styled.div`
 `
 
 const NewsViewer = (props) => {
+
     const [sources, setSource] = useState([]);
     const [{}, drop ] = useDrop({
         accept: ItemTypes.SOURCE,
         drop: (item) => {
             _onDrop(item);
+            return(item.sourceObj);
         },
     })
 
-    const _onDrop = (a) =>{
-        const isFound = sources.find((elem)=>(elem === a.sourceObj))
-        if (isFound){
-            // TODO: do a cool animation here 
-            console.log('ALREADY IN THERE ')
-        } else {
-            setSource([...sources, a.sourceObj]);
-        }
+    const _onDrop = (item) =>{
+        setSource([...sources, item.sourceObj]);
     }
-    
+
     const _clear = () => {
         setSource([])
+    }
+    
+    const _popFromViewer = (item) => {
+        const i = sources.indexOf(item.source);
+        sources.splice(i, 1);
+        setSource([...sources]);
     }
     
 
@@ -52,7 +61,7 @@ const NewsViewer = (props) => {
             <Container>
                 {
                     sources.length === 0 ?
-                    <p>Drop A Source Here</p>
+                    <Prompt>Drop A Source Here</Prompt>
                     :
                     <>
                     <ClearBtn onClick={_clear}>
@@ -60,7 +69,7 @@ const NewsViewer = (props) => {
                     </ClearBtn>
                     { 
                         sources.map((source, i)=>(
-                            <Source source={source} key={i}/>
+                            <Source source={source} key={i} _pop={_popFromViewer}/>
                         ))
                     }
                     </>

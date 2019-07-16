@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Flex from '../Global/Flex'
-import Surface from '../Global/Surface';
+import Flex from '../../Global/Flex'
+import Surface from '../../Global/Surface';
 import { MdAccessTime, MdPerson } from 'react-icons/md'
 
 const Piece = styled.h2`
@@ -29,6 +29,10 @@ const AuthorName = styled.span`
 const Author = styled(Flex)`
     margin-bottom: 5px;
     color: #000000;
+`
+const ContentImg = styled.img`
+    max-height: 85px;
+    width: auto;    
 `
 const PostedAt = styled(Flex)`
     width: 100%;
@@ -58,6 +62,7 @@ const Article = (props) => {
         author,
         timestamp,
         link,
+        img
     } = article;
 
     const IconStyle = {height: '19px', width: '19px', paddingRight: '3px'};
@@ -67,23 +72,32 @@ const Article = (props) => {
     return(
             <ThisArticle>
                 <a href={link} target='_blank'>
-                    <Flex direction='column' align='flex-start'>
+                    <Flex>
+                        {
+                            img ?
+                            <ContentImg srcSet={img}/>
+                            :
+                            <></>
+                        }
+                    
+                        <Flex direction='column' align='flex-start'>
 
-                        <TitleAndIndexContainer>
-                            <Index>{index}</Index>
-                            <Title>{title}</Title>
-                        </TitleAndIndexContainer>
+                            <TitleAndIndexContainer>
+                                <Index>{index}</Index>
+                                <Title>{title}</Title>
+                            </TitleAndIndexContainer>
 
-                        <Author>
-                            <MdPerson style={IconStyle}/> : 
-                            <AuthorName>{author}</AuthorName>
-                        </Author>
+                            <Author>
+                                <MdPerson style={IconStyle}/> : 
+                                <AuthorName>{author}</AuthorName>
+                            </Author>
 
-                        <PostedAt>
-                            <MdAccessTime style={IconStyle}/> : 
-                            <Time>{postedAt}</Time>
-                        </PostedAt>
-
+                            <PostedAt>
+                                <MdAccessTime style={IconStyle}/> : 
+                                <Time>{postedAt}</Time>
+                            </PostedAt>
+                            
+                        </Flex>
                     </Flex>
                 </a>
             </ThisArticle>

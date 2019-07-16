@@ -30,6 +30,8 @@ const SignIn = (props) => {
                 const userExists = await localforage.getItem('user');
                 if (userExists) {
                     setUser(userExists);
+                } else {
+                    setUser(false);
                 }
             } catch (err) {
                 console.log('Error in sign in component: ' + err);
@@ -97,7 +99,11 @@ const SignIn = (props) => {
            
        </Flex>  
        :
+       user === false ?
        <GoogleSignInButton src={require('../../../../assets/images/GoogleSingIn.png')} onClick={_signIn}/>
+       :
+       // If user is null show nothing until it is confirmed that user either exists or not
+       <> </>
     }
     </div>
    )

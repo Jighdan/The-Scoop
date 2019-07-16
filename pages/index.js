@@ -1,13 +1,12 @@
 import Flex from '../src/components/Global/Flex';
+import Link from 'next/link'
 import styled from 'styled-components';
 import Layout from "../src/components/global/Layout/MainLayout";
-import Source from "../src/components/core-news/Source";
-import sources from '../src/config/sources';
-import NewsContainer from '../src/components/core-news/NewsContainer';
+import Button from '../src/components/global/Button';
 
-const SourceContainer = styled(Flex)`
-  padding-top: 30px;
-  width: 80vw;
+const HomeContainer = styled(Flex)`
+  width: 60vw;
+  height: 70vh;
   margin: 0 auto;
 `
 
@@ -15,16 +14,13 @@ export default function indexPage(){
 
   return(
   <Layout>
-  {/* 
-      <SourceContainer justify='center'>
-        {
-          sources.map((source)=>(
-            <Source source={source} key={source.name}/>
-          ))
-        }
-      </SourceContainer>
-  */}
-    <NewsContainer/>
+    <HomeContainer justify='center' direction='column'>
+      <h1>Welcome to The Scoop</h1>
+      <h1>The place for all of your tech news.</h1>
+      <Link href='/news'>
+        <Button>View The News</Button>
+      </Link>
+    </HomeContainer>
   </Layout>
 )
 };

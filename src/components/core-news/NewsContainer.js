@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { createContainer } from "unstated-next"
 import { DndProvider } from 'react-dnd-cjs';
 import HTML5Backend from 'react-dnd-html5-backend-cjs';
 import SourceMenu from './SourceMenu';
 import NewsViewer from './NewsViewer';
 
 const NewsContainer = () => {
-    return(
+    const useSourceState = ( ) => {
+        
+        
+    }
+
+    const _resetMenu = () => {
+
+    }
+    const _onClear = () => {
+
+    }
+     return(
         <div>
             <DndProvider backend={HTML5Backend}>
-                <SourceMenu/>
-                <NewsViewer/>
+                <SourceMenu />
+                <NewsViewer />
             </DndProvider>
         </div>
     )

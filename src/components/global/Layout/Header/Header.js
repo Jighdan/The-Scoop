@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import Router from 'next/router';
 import Flex from '../../Flex';
 import colors from '../../../../assets/styles/colors';
 import SignInComponent from './SignIn';
+import { FaRegBookmark } from 'react-icons/fa'
 
 const StyledHeader = styled.div`
     padding-left: 10px;
@@ -16,6 +18,14 @@ const StyledHeader = styled.div`
     background-color: ${colors.dark};
     color: #FFFFFF;
     z-index: 100;
+`
+const Bookmark = styled(FaRegBookmark)`
+    margin-right: 40px;
+    margin-left: 5px;
+    cursor: pointer;
+`
+const Saved = styled.div`
+    cursor: pointer;
 `
 
 const Logo = styled.img`
@@ -30,8 +40,12 @@ const Header = () => {
                     {/* Logo */}             
                     <Link href='/'>
                         <Logo src={require('../../../../assets/images/TheScoopLogo.png')}/>
-                    </Link>   
+                    </Link>
+                    <Flex>
+
+                     <div onClick={()=>{Router.push('/saved')}}> <Saved>Saved</Saved> <Bookmark/></div>
                         <SignInComponent/>
+                    </Flex>   
                 </Flex> 
         </StyledHeader>
     )

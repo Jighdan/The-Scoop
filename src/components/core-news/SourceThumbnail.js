@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDrag } from 'react-dnd-cjs';
 import ItemTypes from './ItemTypes';
 import Surface from '../global/Surface';
-import Source from './Source';
+import Source from './SourceContent';
 
 const StyledSourceThumbnail = styled(Surface)`
     display: flex;
@@ -12,6 +12,7 @@ const StyledSourceThumbnail = styled(Surface)`
     margin-left: 10px;
     padding: 5px;
     border-radius: 4px;
+    cursor: pointer;
 `
 const SourceImg =styled.img`
     height: 30px;
@@ -20,12 +21,13 @@ const SourceImg =styled.img`
 `
 
 const SourceThumbnail = (props) => {
-    const { sourceObj } = props;
+    const { sourceObj, _pop } = props;
     const [{ isDragging }, drag] = useDrag({
         item: {sourceObj, type: ItemTypes.SOURCE },
         end: dropResult => {
             if (dropResult){
                 console.log(`Dropped ${sourceObj.name} into ${JSON.stringify(dropResult)}`)
+                _pop(sourceObj);
             }   
           
         },
