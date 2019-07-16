@@ -11,6 +11,8 @@ Steps to add a source if source is already in DB
 - Logo -> add a logo to `src/assets/images/sourceLogos/`
 
 TO RUN --
-```npm install```
-```npm run dev```
+`npm install`
+`npm run dev`
+
 add me on discord and ask for a .env file :)
+qorxi#9972
