@@ -1,10 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import Router from 'next/router';
 import Flex from '../../Flex';
 import Button from '../../Button';
 import localforage from 'localforage'
 import { Firebase } from '../../../../config/firebaseconfig';
 import { IoMdLogOut } from 'react-icons/io';
+import colors from '../../../../assets/styles/colors';
+
+
+const SignOutButton = styled(Button)`
+    width: 80px;
+    height: 30px;
+    font-size: 1rem;
+    background-color:${colors.red};
+`
 
 const SignOut = (props) => {
     const {
@@ -12,7 +22,6 @@ const SignOut = (props) => {
         className,
         style,
         color,
-        shadow,
     } = props;
     const _signOut = () => {
         Firebase.auth().signOut().then(()=>{
@@ -24,13 +33,14 @@ const SignOut = (props) => {
             });
         });
     }
+    const btnShadow = '0px 4px 0px 0px #940101';
     return(
-        <Button onClick={_signOut} className={className} shadow={shadow}
-        style={{width: props.width || '135px', ...style}} color={color}>
+        <SignOutButton onClick={_signOut} className={className} shadow={btnShadow}
+        style={{width: props.width || '75px', ...style}} color={color}>
             <Flex justify='space-around'>
-                sign out <IoMdLogOut/>
+                Sign out <IoMdLogOut/>
             </Flex>
-        </Button>
+        </SignOutButton>
     )
 }
 export default SignOut;

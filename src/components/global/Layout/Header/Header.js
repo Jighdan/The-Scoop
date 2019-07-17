@@ -24,7 +24,7 @@ const Bookmark = styled(FaRegBookmark)`
     margin-left: 5px;
     cursor: pointer;
 `
-const Saved = styled.div`
+const Saved = styled(Flex)`
     cursor: pointer;
 `
 
@@ -37,15 +37,18 @@ const Header = () => {
     return(
         <StyledHeader>
                 <Flex height='85px' justify='space-between'>
-                    {/* Logo */}             
+       
                     <Link href='/'>
                         <Logo src={require('../../../../assets/images/TheScoopLogo.png')}/>
                     </Link>
-                    <Flex>
 
-                     <div onClick={()=>{Router.push('/saved')}}> <Saved>Saved</Saved> <Bookmark/></div>
+                    <Flex>
+                        <div onClick={()=>{Router.push('/saved')}}> 
+                            <Saved>Saved <Bookmark/> </Saved>
+                        </div>
                         <SignInComponent/>
-                    </Flex>   
+                    </Flex>  
+
                 </Flex> 
         </StyledHeader>
     )

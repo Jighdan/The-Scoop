@@ -10,6 +10,8 @@ import { MdBlock } from 'react-icons/md';
 const Prompt = styled.div`
     padding: 25px;
     border: 2px dashed #000000;
+    margin-top: auto;
+    margin-bottom: auto;
 `
 
 
@@ -21,7 +23,7 @@ const Container = styled(Surface)`
     height: 70vh;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
 `
 const ClearBtn = styled.div`
     position: absolute;
@@ -31,7 +33,7 @@ const ClearBtn = styled.div`
 `
 
 const NewsViewer = (props) => {
-
+    const { onClear } = props;
     const [sources, setSource] = useState([]);
     const [{}, drop ] = useDrop({
         accept: ItemTypes.SOURCE,
@@ -47,6 +49,7 @@ const NewsViewer = (props) => {
 
     const _clear = () => {
         setSource([])
+        onClear();
     }
     
     const _popFromViewer = (item) => {

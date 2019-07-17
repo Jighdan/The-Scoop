@@ -7,6 +7,7 @@ import Article from './ArticleComponents/ArticleStandard';
 import colors from '../../assets/styles/colors';
 import Flex from '../Global/Flex';
 import ItemTypes from './ItemTypes';
+import { FaBell } from 'react-icons/fa'
 const Loader = require('../../assets/images/DataLoading.svg')
 
 const Container = styled(Surface)`
@@ -20,7 +21,7 @@ const Container = styled(Surface)`
     overflow-y: scroll;
     scroll-behavior: smooth;
 `
-const TitleContainer = styled.a`
+const SourceHeader = styled.a`
     display: flex;
     position: absolute;
     top: 0;
@@ -50,6 +51,15 @@ const LoaderContainer = styled(Flex)`
     margin-top: 100px;
     width: 100%;
 `
+const Subscribe = styled(Flex)`
+    margin-left: auto;
+    margin-right: 15px;
+    padding: 5px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+    pointer-events: none;
+`
 
 
 const Source = (props) => {
@@ -77,6 +87,11 @@ const Source = (props) => {
         setArticles(articles);
         setLoading(false);
     }
+    
+    const _subscribe = (event) => {
+        console.log('SUBSCRIBE')
+        event.stopPropagation();
+    }
 
 
     useEffect(()=>{
@@ -88,29 +103,33 @@ const Source = (props) => {
 
     return(
         <Container borderRadius='10px' key={name}>    
-            <TitleContainer style={theme} href={link} target='_blank' ref={dragSource}>    
+            <SourceHeader style={theme} href={link} target='_blank' ref={dragSource}>    
                 <Logo src={logo}/>           
-                <SourceTitle style={{color: theme.color}}>{name}</SourceTitle>     
-            </TitleContainer>     
+                <SourceTitle style={{color: theme.color}}>{name}</SourceTitle>  <Subscribe 
+                onClick={(e) => _subscribe(e)}
+                style={{borderColor: theme.color}}> 
+                    <FaBell/> 
+                </Subscribe>   
+            </SourceHeader>     
             <ContentContainer>
-                {
-                    loading ? 
-                    <LoaderContainer justify='center'>
-                        <img src={Loader}/>
-                    </LoaderContainer>
-                    :
-                    articles.map((article, i)=>{
-                        return(
-                            <Article article={article} 
-                            key={`${name}-article-${i}`}
-                            index={i + 1}/>
-                        )
+            {
+                loading ? 
+                <LoaderContainer justify='center'>
+                    <img src={Loader}/>
+                </LoaderContainer>
+                :
+                articles.map((article, i)=>{
+                    return(
+                        <Article article={article} 
+                        key={`${name}-article-${i}`}
+                        index={i + 1}/>
+                    )
 
-                    })
-                }   
+                })
+            }   
             </ContentContainer>
         </Container>
     )
 }
 
-export default Source 
+export default Source;

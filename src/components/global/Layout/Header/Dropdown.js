@@ -40,7 +40,7 @@ const CustomDropdown = (props) => {
         Router.push('/profile-settings');
     }
     const btnColor = colors.red;
-    const btnShadow = '0px 4px 0px 0px #940101';
+    
     return(
         <div>
             <div onClick={_toggle}>
@@ -53,7 +53,7 @@ const CustomDropdown = (props) => {
                             <Itm onClick={_routeToSettings}>Settings</Itm>
                         </DropdownItem>
                         <DropdownItem>
-                            <SignOut setUserStateNull={setUserStateNull} color={btnColor} shadow={btnShadow}/>
+                            <SignOut setUserStateNull={setUserStateNull}/>
                         </DropdownItem>
 
                     </DropdownMenu>

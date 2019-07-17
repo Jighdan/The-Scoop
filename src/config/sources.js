@@ -1,7 +1,8 @@
 import {
     AwwwardsTheme, 
     MozillaBlogTheme, 
-    PerconaTheme
+    PerconaTheme,
+    SmashingTheme
 } from '../assets/styles/sourceThemes/index';
 
 const sources = [
@@ -9,7 +10,7 @@ const sources = [
         name: 'Mozilla Blog',
         link: 'https://blog.mozilla.org/',
         theme: MozillaBlogTheme,
-        logo: require('../assets/images/sourceLogos/MozillaBlogLogo.svg'),
+        logo: require('../assets/images/sourceLogos/MozillaBlogLogo.svg')
     },
     {
         name: 'Percona',
@@ -22,6 +23,13 @@ const sources = [
         link: 'https://www.awwwards.com',
         theme: AwwwardsTheme,
         logo: require('../assets/images/sourceLogos/AwwwardsLogo.svg')
+    },
+    {
+        name: 'Smashing',
+        link: 'https://www.smashingmagazine.com/articles/',
+        theme: SmashingTheme,
+        logo: require('../assets/images/sourceLogos/SmashingLogo.png')
+
     }
 ];
 

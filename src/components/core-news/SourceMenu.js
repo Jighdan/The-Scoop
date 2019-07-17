@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { useDrop } from 'react-dnd-cjs'
 import styled from 'styled-components';
 import sources from '../../config/sources';
@@ -11,19 +11,27 @@ import ItemTypes from './ItemTypes';
 
 const Menu = styled(Surface)`
     padding: 15px 25px;
-    width: 70vw;
+    height: 70px;
+    width: calc(70vw + 50px);
     margin: 15px auto;
     background-color: ${colors.primary};
     overflow-x: scroll;
+    box-sizing: border-box;
 `
 
 const MenuFlex = styled(Flex)`
-  
+    overflow-x: scroll;
 `
 
-const SourceMenu = (props) => {
+const SourceMenu = forwardRef((props, ref) => {
 
     const [ sourceList, setSourceList ] = useState([...sources]);
+
+    useImperativeHandle(ref, ()=>({
+        resetState() {
+            setSourceList([...sources]);
+        }
+    }))
 
     const _onSourceDrop = item => {
         setSourceList([...sourceList, item.source])
@@ -39,15 +47,10 @@ const SourceMenu = (props) => {
         }
       })
 
-    const _popFromSourceList = (obj) => {
-        const found = sourceList.find((source)=>{
-            return source === obj;
-        });
-        if (found) {    
-            const index = sourceList.indexOf(found);
-            sourceList.splice(index, 1);
-            setSourceList([...sourceList]);
-        }
+    const _popFromSourceList = (obj) => { 
+        const index = sourceList.indexOf(obj);
+        sourceList.splice(index, 1);
+        setSourceList([...sourceList]);
     }
     
     return(
@@ -67,5 +70,6 @@ const SourceMenu = (props) => {
         </Menu>
         </div>
     )
-}
+});
+
 export default SourceMenu;

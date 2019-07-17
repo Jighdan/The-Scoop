@@ -13,7 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.0.0",
-    "easy-peasy": "^2.6.4",
     "firebase": "^6.2.3",
     "imagemin-mozjpeg": "^8.0.0",
     "imagemin-optipng": "^7.0.0",
