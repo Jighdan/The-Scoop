@@ -5,7 +5,7 @@ import Surface from '../global/Surface';
 import { getArticles } from '../../utils/firestore/queries/getArticles';
 import Article from './ArticleComponents/ArticleStandard';
 import colors from '../../assets/styles/colors';
-import Flex from '../Global/Flex';
+import Flex from '../global/Flex';
 import ItemTypes from './ItemTypes';
 import { FaBell } from 'react-icons/fa'
 const Loader = require('../../assets/images/DataLoading.svg')
@@ -19,6 +19,7 @@ const Container = styled(Surface)`
     max-height: 70vh;
     border-radius: 5px;
     overflow-y: scroll;
+    overflow-x: hidden;
     scroll-behavior: smooth;
 `
 const SourceHeader = styled.a`
@@ -32,6 +33,7 @@ const SourceHeader = styled.a`
     border-radius: 5px 5px 0px 0px;
 `
 const SourceTitle = styled.h2`
+    display: static;
     font-size: 2rem;
     color: #ffffff;
     justify-self: center;

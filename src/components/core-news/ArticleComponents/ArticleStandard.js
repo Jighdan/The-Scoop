@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Flex from '../../Global/Flex'
-import Surface from '../../Global/Surface';
+import Flex from '../../global/Flex'
+import Surface from '../../global/Surface';
 import { MdAccessTime, MdPerson } from 'react-icons/md'
 
 const Piece = styled.h2`
@@ -10,10 +10,12 @@ const Piece = styled.h2`
 `
 const ThisArticle = styled(Surface)`
     width: 80%;
+    height: auto;
     margin: 20px;
     padding: 15px;
     color: #000000;
     cursor: pointer;
+    overflow: hidden;
 `
 const Title = styled(Piece)`
     font-size: 1.25rem;
@@ -44,6 +46,7 @@ const Time = styled.h4`
     color: #000000;
 `
 const TitleAndIndexContainer = styled(Flex)`
+    height: auto;
     margin-left: 4px;
     color: #000000;
 `

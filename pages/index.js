@@ -1,4 +1,4 @@
-import Flex from '../src/components/Global/Flex';
+import Flex from '../src/components/global/Flex';
 import Link from 'next/link'
 import styled from 'styled-components';
 import Layout from "../src/components/global/Layout/MainLayout";

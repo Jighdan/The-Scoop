@@ -13,18 +13,24 @@ const Prompt = styled.div`
     margin-top: auto;
     margin-bottom: auto;
 `
-
-
 const Container = styled(Surface)`
     position: relative;
     width: 70vw;
     padding: 25px;
     margin: 0 auto;
     height: 70vh;
+    white-space: nowrap;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
 `
+
+const ScrollContainer = styled.div`
+    margin-left: 1px;
+`
+
 const ClearBtn = styled.div`
     position: absolute;
     cursor: pointer;
@@ -70,11 +76,13 @@ const NewsViewer = (props) => {
                     <ClearBtn onClick={_clear}>
                         Clear <MdBlock/>
                     </ClearBtn>
+                    <ScrollContainer>
                     { 
                         sources.map((source, i)=>(
                             <Source source={source} key={i} _pop={_popFromViewer}/>
                         ))
                     }
+                    </ScrollContainer>
                     </>
                 }
             </Container>

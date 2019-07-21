@@ -3,7 +3,7 @@ import { useDrop } from 'react-dnd-cjs'
 import styled from 'styled-components';
 import sources from '../../config/sources';
 import SourceThumbnail from './SourceThumbnail';
-import Flex from '../Global/Flex';
+import Flex from '../global/Flex';
 import Surface from '../global/Surface';
 import colors from '../../assets/styles/colors';
 import ItemTypes from './ItemTypes';
