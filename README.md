@@ -1,7 +1,7 @@
 # The Scoop
 ---
 ## Contributing
-Anybody is free to contribute, regardless of experience. After completeing the intial setup, choose one of the two options below in order to get the app running.
+Anybody is free to contribute, regardless of experience. After completeing the initial setup, choose one of the two options below in order to get the app running.
 
 ### Initial setup
 Run the following commands:
@@ -12,11 +12,11 @@ Run the following commands:
 
 After cloning the repository and installing the dependencies, the app will **not** run, because it requires access to a database. Choose one of the two options below:
 
-### 1. Get access to the development databse
+### 1. Get access to the development database
 
 Send me a message on discord asking for access to the development database. I will send a `.env` file that you will place at the root of the project. **My discord is: qorxi#9972**.
 
-### 2. Build the databse yourself
+### 2. Build the database yourself
 
 If you would rather have the ability to play around with the database, you can build it yourself in a few steps:  
 
@@ -46,6 +46,6 @@ FIREBASE_APP_ID=your_firebase_app_id
 * This is the same `.env` file that you will use in The-Scoop
 * Run the app with `npm start` 
 
-Now you should have a populated databse to work with, make sure you copy the `.env` file into The-Scoop so that it can read from the databse. 
+Now you should have a populated database to work with, make sure you copy the `.env` file into The-Scoop so that it can read from the database. 
 
 
